@@ -29,7 +29,6 @@ public class MainNiv3 {
      * Virer à droite
      * Changer de voie à gauche
      * Changer de voie à droite
-     * Demi-tour
      * Contrôle visibilité (Intérieur, extérieur, angles morts)
      * Clignotant à gauche
      * Clignotant à droite

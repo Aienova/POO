@@ -2,16 +2,20 @@ package Intro;
 
 
 public class JeuVideo {
+
+    // Attributs
+    // Les attributs sont en private pour encapsuler les données de l'objet
     private String nom;
     private double prix;
     private String plateforme;
     private int pegi;
     private int taille;
     private String genre;
-    private boolean installe;
+    private boolean isInstalle;
     private String version;
 
-    // Constructeur
+    // Constructeur, permet de créer un objet JeuVideo avec les attributs définis
+    // Le constructeur initialise les attributs de l'objet
     public JeuVideo(String nom, double prix, String plateforme, int pegi, int taille, String genre, boolean installe, String version) {
         this.nom = nom;
         this.prix = prix;
@@ -19,11 +23,12 @@ public class JeuVideo {
         this.pegi = pegi;
         this.taille = taille;
         this.genre = genre;
-        this.installe = installe;
+        this.isInstalle = installe;
         this.version = version;
     }
 
-    // Méthodes
+    // Comportement de la classe JeuVideo
+    // Ces méthodes définissent les actions que l'objet JeuVideo peut effectuer
     public void jouer() {
         System.out.println(infoDuJeu());
         System.out.println(nom + " est en cours d'exécution...");
@@ -35,10 +40,10 @@ public class JeuVideo {
     }
 
     public void installer() {
-        if (!installe) {
-            installe = true;
-                    System.out.println(infoDuJeu());
-             System.out.println(nom + " est en cours d'exécution...");
+        if (!isInstalle) {
+            isInstalle = true;
+            System.out.println(infoDuJeu());
+            System.out.println(nom + " est en cours d'exécution...");
             System.out.println(nom + " est maintenant installé.");
         } else {
             System.out.println(nom + " est déjà installé.");
@@ -53,11 +58,12 @@ public class JeuVideo {
         info+="Nom du Jeu video :"+this.nom+"\n";
         info+="Prix du jeu :"+this.prix+" euros \n";
         info+="pegi : +"+this.pegi+"\n";
-        info+="taille : "+this.pegi+"go \n";
-        info+="genre : "+this.genre+"go \n";
-        info+="installe : "+this.installe+"go \n";       
-        info+="version : "+this.version+"go \n";
-        
+        info+="plateforme : "+this.plateforme+"\n";
+        info+="taille : "+this.taille+"go \n";
+        info+="genre : "+this.genre+" \n";
+        info+="installe : "+(this.isInstalle ? "Oui" : "Non")+" \n";
+        info+="version : "+this.version+" \n";
+
         return info;
 
 
@@ -69,4 +75,19 @@ public class JeuVideo {
     }
 
     // Optionnel : Getters/Setters si tu veux y accéder ailleurs
+
+
+    //"Get" pour types non-boolean
+
+    public String getNom() {
+        return nom;
+    }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    // "is" pour types boolean
+    public boolean isInstalle() {
+        return isInstalle;
+    }
 }

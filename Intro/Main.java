@@ -2,6 +2,10 @@ package Intro;
 
 public class Main {
     public static void main(String[] args) {
+
+
+        // Exemple d'instanciation de la classe JeuVideo
+        // Vous pouvez créer un objet JeuVideo avec les attributs définis dans le constructeur
         JeuVideo FC25 = new JeuVideo(
             "FC25",
             69.0,
