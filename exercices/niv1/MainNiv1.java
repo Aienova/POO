@@ -20,7 +20,7 @@ public class MainNiv1 {
             
             cocaCola.infoBouteille();
             // Vérification aléatoire pour vider la bouteille
-            if (cocaCola.isOpen() && (!cocaCola.isEmpty()) && Math.random() < 0.1*risk) { // 10% de chance
+            if (cocaCola.isOpen() && (!cocaCola.isEmpty()) && cocaCola.randomRisk() < 0.5 * risk) { // 10% de chance
                 System.out.println("Oups! la bouteille s'est vidée accidentellement");
                 cocaCola.vider();
             }

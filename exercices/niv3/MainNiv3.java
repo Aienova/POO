@@ -86,11 +86,14 @@ public class MainNiv3 {
      * - Faire un excès de vitesse +5 km/h : -2 points
      * - Ne pas céder le passage : -3 points
      * - Brûler un feu orange : -5 points
+     * - Ne pas laisser la priorité à droite : -3 points
      * - Ne pas mettre son clignotant : -2 point
      * - Ne pas contrôler les angles morts lors d'un changement de voie : -3 points
      * - Ne pas mettre de feu de croisement dans un tunnel : -2 points
      * - Ne pas activer les essuie-glaces en cas de pluie : -5 points
      * - Ne pas ralentir avant un dos d'âne : -2 points
+     * 
+     * Si vous arrivez à moins de 20 points, le test est terminé et vous avez échoué.
      * 
      * la pluie doit tomber aléatoirement pendant le test de conduite, si la pluie tombe, 
      * vous devez activer les essuie-glaces, et les limitations de vitesse sont réduites de 10 km/h.
@@ -100,6 +103,35 @@ public class MainNiv3 {
      */
     
     public static void main(String[] args) {
+
+        // Ici, vous pouvez créer des instances de la classe Voiture et simuler le test de conduite
+        // Par exemple :
+        Voiture maVoiture = new Voiture("Toyota", "Corolla", 130);
+
+        
+        // Simuler les actions du test de conduite
+
+        if(command.containt("D")) {
+            maVoiture.demarrer();
+        } else {
+            System.out.println("Vous devez embrayer pour démarrer la voiture.");
+            return;
+        }
+        maVoiture.demarrer();
+        maVoiture.accelerer(30);
+        maVoiture.virerAGauche();
+        maVoiture.continuerToutDroit();
+        maVoiture.ralentir();
+        maVoiture.virerADroite();
+        maVoiture.arreter();
+
+        System.out.println("1. Démarrer la voiture");
+        // Il faudra taper en scanner D pour démarrer la voiture
+
+        System.out.println("2. Ralentir puis tourner à gauche (vous êtes prioritaire)");
+        // Il faudra taper en scanner R pour ralentir et TG pour tourner à gauche
+        
+        // Continuez avec les autres étapes du test...
 
 
     }

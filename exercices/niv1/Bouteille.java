@@ -75,6 +75,11 @@ public class Bouteille {
         }
     }
 
+    public int randomRisk() {
+        // Génère un risque aléatoire entre 0 et 20
+        return (int) (Math.random() * 20);
+    }
+
     // Méthode pour vider la bouteille aléatoirement
     public void vider() {
         if (!isEmpty) {
