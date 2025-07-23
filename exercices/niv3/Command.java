@@ -194,7 +194,7 @@ public class Command {
             // Commandes de boîte de vitesses
             case "V":
                 car.gearbox(value);
-                car.lowOrHighRegime(value);
+                
                 return false;
             case "MA":
                 car.reverseGear();

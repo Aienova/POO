@@ -252,24 +252,30 @@ public class Car {
         int regime;
         System.err.println("Vitesse actuelle: " + currentSpeed + " km/h, Vitesse engagée: " + gear);
         switch(gear) {
+ 
             case 1:
             // Vérification du régime moteur, sous-régime return 1, surrégime return 2
             // Régime moteur normal return 0
+
+                System.out.println("Vitesse 1 détectée");
                 
                 if(currentSpeed > 30) {
                     regime = 2; // Surrégime
                 } else {
                     regime = 0; // Régime normal
                 }
+                break;
 
             case 2:
-
+                System.out.println("Vitesse 2 détectée");
                 if(currentSpeed > 50) {
                     regime = 2; // Surrégime
                 } else {
                     regime = 0; // Régime normal
                 }
+                break;
             case 3:
+                System.out.println("Vitesse 3 dectectée");
                 if(currentSpeed > 70) {
                     regime = 2; // Surrégime
                 } else if(currentSpeed < 30) {
@@ -277,7 +283,11 @@ public class Car {
                 } else {
                     regime = 0; // Régime normal
                 }
+                System.out.println("régime: " + regime );
+                break;
             case 4:
+            System.out.println("Vitesse 4 dectectée");
+            System.out.println("vitesse actuelle: " + currentSpeed + " km/h");
                 if(currentSpeed > 90) {
                     regime = 2; // Surrégime
                 } else if(currentSpeed < 50) {
@@ -285,7 +295,11 @@ public class Car {
                 } else {
                     regime = 0; // Régime normal
                 }
+                System.out.println("régime: " + regime );
+                break;
             case 5:
+                System.out.println("Vitesse 5 dectectée");
+                System.out.println("vitesse actuelle: " + currentSpeed + " km/h");
                 if(currentSpeed > 110) {
                     regime = 2; // Surrégime
                 } else if(currentSpeed < 70) {
@@ -293,17 +307,23 @@ public class Car {
                 } else {
                     regime = 0; // Régime normal
                 }
+                System.out.println("régime: " + regime );
+                break;
             case 0: // Point mort
                 regime = 0; // Point mort, pas de régime moteur
+                break;
             case -1: // Marche arrière
                 if(currentSpeed > 20) {
                     regime = 2; // Surrégime
                 } else {
                     regime = 0; // Régime normal
                 }
-          
+                System.out.println("Marche arrière engagée, régime: " + regime);
+                break;
             default:
                 regime = 0; // Vitesse non définie pour les autres vitesses
+                System.out.println("Vitesse non définie, régime: " + regime);
+                break;
         }
 
         switch(regime) {
