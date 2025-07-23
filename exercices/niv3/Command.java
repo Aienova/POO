@@ -47,6 +47,30 @@ public class Command {
 
         String[] commands = StringtoTab(expectedCommands);
 
+        if(car.getRegime() > 0) {
+            int vitesse;
+            System.out.println(Colors.warning("Boite de vitesse : " + car.getCurrentGear()));
+
+            switch (car.getRegime()) {
+                case 1:
+                    System.out.println(Colors.warning("Moniteur : Attention, vous êtes en sous-régime !"));
+                    System.out.println(Colors.help("Veuillez choisir la bonne vitesse entre 1 et 5."));
+                    vitesse=keyboard.nextInt();
+                    keyboard.nextLine();
+                    relatedCommand("V", car, road, vitesse);
+                    return 0;
+                case 2:
+                    System.out.println(Colors.error("Moniteur : Attention, vous êtes en surrégime !"));
+                    System.out.println(Colors.help("Veuillez choisir la bonne vitesse entre 1 et 5."));
+                    vitesse=keyboard.nextInt();
+                    keyboard.nextLine();
+                    relatedCommand("V", car, road, vitesse);
+                    return 0;
+                default:
+                    break;
+            }
+      
+        }
 
         // Vérification de la pluie avant de commencer
        if(road.setRandomRain()&& car.isWipers()==false){
@@ -344,7 +368,7 @@ public class Command {
     }
 
 
-
+    
 
     public static boolean compareCommands(String chosenCommand, String command, String expectedCommand) {
         // Cette méthode peut être utilisée pour comparer deux chaînes de commande

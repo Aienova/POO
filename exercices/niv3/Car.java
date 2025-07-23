@@ -15,6 +15,7 @@ public class Car {
     private boolean headlights; // Feux de croisement
     private boolean wipers; // Essuie-glaces
     private boolean hazardLights; // Feux de détresse
+    private int regime; // Régime moteur (0 = Normal, 1 = Sous-régime, 2 = Surrégime)
 
     public Car(String brand, String model, int maxSpeed, int powerEngine) {
         this.brand = brand;
@@ -32,6 +33,7 @@ public class Car {
         this.headlights = false;
         this.wipers = false;
         this.hazardLights = false;
+        this.regime = 0; // Régime moteur normal
     }
 
     // Getters and setters for the attributes
@@ -45,6 +47,15 @@ public class Car {
 
     public String getModel() {
         return model;
+    }
+
+    public void setRegime(int regime) {
+        this.regime = regime;
+
+    }
+
+    public int getRegime() {
+        return regime;
     }
 
     public void setModel(String model) {
@@ -250,7 +261,7 @@ public class Car {
 
     public void lowOrHighRegime(int gear) {
         int regime;
-        System.err.println("Vitesse actuelle: " + currentSpeed + " km/h, Vitesse engagée: " + gear);
+       
         switch(gear) {
  
             case 1:
@@ -329,6 +340,7 @@ public class Car {
         switch(regime) {
             case 0:
                 System.out.println("Régime moteur normal");
+                
                 break;
             case 1:
                 System.out.println(Colors.error("Sous-régime moteur détecté"));
@@ -339,6 +351,7 @@ public class Car {
             default:
                 System.out.println("Régime moteur inconnu");
         }
+        setRegime(regime);
       
     }
 
