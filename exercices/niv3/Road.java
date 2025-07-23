@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Road {
     
     // Attributs de la route
@@ -5,7 +7,6 @@ public class Road {
     private boolean isCorrect;
     private int speedLimit;
     private boolean isPedestrian;        // Si des passants traversent le passage piéton
-    private boolean isLowCarFront;       // Si une voiture lente gêne le passage
     private boolean isRedLight;
     private boolean isOrangeLight;
     private boolean isGreenLight;
@@ -24,7 +25,6 @@ public class Road {
         this.isCorrect = true;
         this.speedLimit = 50;
         this.isPedestrian = false;
-        this.isLowCarFront = false;
         this.isRedLight = false;
         this.isOrangeLight = false;
         this.isGreenLight = true;
@@ -39,14 +39,13 @@ public class Road {
     
     // Constructeur avec paramètres
     public Road(String instruction, boolean isCorrect, int speedLimit, boolean isPedestrian, 
-                boolean isLowCarFront, boolean isRedLight, boolean isOrangeLight, 
+                 boolean isRedLight, boolean isOrangeLight, 
                 boolean isGreenLight, boolean isRaining, int traffic, boolean isHighway, 
                 boolean isParking, boolean isTunnel, boolean isTheEnd) {
         this.instruction = instruction;
         this.isCorrect = isCorrect;
         this.speedLimit = speedLimit;
         this.isPedestrian = isPedestrian;
-        this.isLowCarFront = isLowCarFront;
         this.isRedLight = isRedLight;
         this.isOrangeLight = isOrangeLight;
         this.isGreenLight = isGreenLight;
@@ -62,14 +61,19 @@ public class Road {
 
 
     // Pluie aléatoire
-    public void setRandomRain() {
-        System.out.println("Vérification de la pluie...");
+    public boolean setRandomRain() {
+         // Vérification de la pluie
+         // 100% de chance qu'il pleuve
         this.isRaining = Math.random() < 1; // 100% de chance qu'il pleuve
-        if (this.isRaining ) {
-            this.speedLimit -= 10; // Réduction de la limitation de vitesse en cas de pluie si la vitesse est supérieure à 50 km/h
-            System.out.println(Colors.warning("Il pleut, il faut mettre les essuie-glaces."));
+        if (this.isRaining) {
+            // Si la vitesse limite est supérieure à 50 km/h, on réduit la limitation de vitesse
+            if (this.speedLimit > 50) {
+                this.speedLimit -= 10; // Réduction de la limitation de vitesse en cas de pluie si la vitesse est supérieure à 50 km/h
+            }
+           
+            return true; // Indique qu'il pleut
         }
-         System.out.println("Etat de la pluie: " + (this.isRaining ? "Il pleut" : "Il ne pleut pas"));
+        return false; // Indique qu'il ne pleut pas
     }
     
     // Getters et Setters
@@ -121,13 +125,6 @@ public class Road {
         this.isPedestrian = isPedestrian;
     }
     
-    public boolean isLowCarFront() {
-        return isLowCarFront;
-    }
-    
-    public void setLowCarFront(boolean isLowCarFront) {
-        this.isLowCarFront = isLowCarFront;
-    }
     
     public boolean isRedLight() {
         return isRedLight;
@@ -193,6 +190,23 @@ public class Road {
     public boolean isParking() {
         return isParking;
     }
+
+    public void checkTrafficJam(int traffic){
+
+        if (traffic == 3) {
+            System.out.println(Colors.warning("Attention, il y a un bouchon sur la route !"));
+
+            this.speedLimit = 30; // Réduit la limitation de vitesse en cas de bouchon
+        } else if (traffic == 2) {
+            System.out.println(Colors.warning("Le trafic est dense, soyez prudent."));
+            this.speedLimit = 40; // Réduit la limitation de vitesse en cas de trafic dense
+        } else if (traffic == 1) {
+            System.out.println(Colors.info("Le trafic est modéré."));
+        } else {
+            System.out.println(Colors.success("Le trafic est bon, vous pouvez rouler normalement."));
+        }
+        
+    }
     
     public void setParking(boolean isParking) {
         this.isParking = isParking;
@@ -222,7 +236,6 @@ public class Road {
         System.out.println("Correct: " + (isCorrect ? "Oui" : "Non"));
         System.out.println("Limitation de vitesse: " + speedLimit + " km/h");
         System.out.println("Piétons: " + (isPedestrian ? "Présents" : "Absents"));
-        System.out.println("Voiture lente devant: " + (isLowCarFront ? "Oui" : "Non"));
         System.out.println("Feu: " + getLightStatus());
         System.out.println("Pluie: " + (isRaining ? "Oui" : "Non"));
         System.out.println("Trafic: " + getTrafficDescription());

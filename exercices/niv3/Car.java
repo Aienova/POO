@@ -192,6 +192,7 @@ public class Car {
                 currentSpeed += increment;
                  setCurrentSpeed(currentSpeed);
                 System.out.println("Accélération : vitesse actuelle " + currentSpeed + " km/h");
+                lowOrHighRegime(currentGear);
             } else {
                 currentSpeed = maxSpeed;
                 setCurrentSpeed(currentSpeed);
@@ -209,6 +210,7 @@ public class Car {
             currentSpeed -= decrement;
             System.out.println("Décélération : vitesse actuelle " + currentSpeed + " km/h");
             setCurrentSpeed(currentSpeed);
+            lowOrHighRegime(currentGear);
         } else {
             System.out.println("Véhicule arrêté");
         }
@@ -223,9 +225,101 @@ public class Car {
         }
     }
 
+    public void resetIndicators() {
+        leftIndicator = false;
+        rightIndicator = false;
+        System.out.println("Clignotants désactivés");
+    }
+
+    public void setLeftIndicator() {
+        this.leftIndicator = true;
+        this.rightIndicator = false; // Désactive le clignotant droit
+        System.out.println("Clignotant gauche activé");
+    }
+
+    public void setRightIndicator() {
+        this.rightIndicator = true;
+        this.leftIndicator = false; // Désactive le clignotant gauche
+        System.out.println("Clignotant droit activé");
+    }
+
     public void stop() {
         currentSpeed = 0;
         System.out.println("Véhicule arrêté ou point mort");
+    }
+
+    public void lowOrHighRegime(int gear) {
+        int regime;
+        System.err.println("Vitesse actuelle: " + currentSpeed + " km/h, Vitesse engagée: " + gear);
+        switch(gear) {
+            case 1:
+            // Vérification du régime moteur, sous-régime return 1, surrégime return 2
+            // Régime moteur normal return 0
+                
+                if(currentSpeed > 30) {
+                    regime = 2; // Surrégime
+                } else {
+                    regime = 0; // Régime normal
+                }
+
+            case 2:
+
+                if(currentSpeed > 50) {
+                    regime = 2; // Surrégime
+                } else {
+                    regime = 0; // Régime normal
+                }
+            case 3:
+                if(currentSpeed > 70) {
+                    regime = 2; // Surrégime
+                } else if(currentSpeed < 30) {
+                    regime = 1; // Sous-régime
+                } else {
+                    regime = 0; // Régime normal
+                }
+            case 4:
+                if(currentSpeed > 90) {
+                    regime = 2; // Surrégime
+                } else if(currentSpeed < 50) {
+                    regime = 1; // Sous-régime
+                } else {
+                    regime = 0; // Régime normal
+                }
+            case 5:
+                if(currentSpeed > 110) {
+                    regime = 2; // Surrégime
+                } else if(currentSpeed < 70) {
+                    regime = 1; // Sous-régime
+                } else {
+                    regime = 0; // Régime normal
+                }
+            case 0: // Point mort
+                regime = 0; // Point mort, pas de régime moteur
+            case -1: // Marche arrière
+                if(currentSpeed > 20) {
+                    regime = 2; // Surrégime
+                } else {
+                    regime = 0; // Régime normal
+                }
+          
+            default:
+                regime = 0; // Vitesse non définie pour les autres vitesses
+        }
+
+        switch(regime) {
+            case 0:
+                System.out.println("Régime moteur normal");
+                break;
+            case 1:
+                System.out.println(Colors.error("Sous-régime moteur détecté"));
+                break;
+            case 2:
+                System.out.println(Colors.error("Surrégime moteur détecté"));
+                break;
+            default:
+                System.out.println("Régime moteur inconnu");
+        }
+      
     }
 
     // Méthodes de vitesse
@@ -235,9 +329,24 @@ public class Car {
                 currentGear = gear;
                 if (gear == 0) {
                     System.out.println("Point mort engagé");
+                } else if (gear == 1 ) {
+
+                    System.out.println("Vitesse 1 engagée");
+                } else if (gear == 2) { 
+                    System.out.println("Vitesse 2 engagée");
+                } else if (gear == 3) {
+                    System.out.println("Vitesse 3 engagée");
+                } else if (gear == 4) {
+                    System.out.println("Vitesse 4 engagée");
+                } else if (gear == 5) {
+                    System.out.println("Vitesse 5 engagée");
+                } else if (gear == -1) {
+                    System.out.println("Marche arrière engagée");
                 } else {
                     System.out.println("Vitesse " + gear + " engagée");
                 }
+                setCurrentGear(gear);
+                lowOrHighRegime(currentGear);
             } else {
                 System.out.println("Vitesse invalide (0-5)");
             }
@@ -245,6 +354,8 @@ public class Car {
             System.out.println("Le moteur doit être démarré");
         }
     }
+
+    
 
     public void reverseGear() {
         if (isEngineOn && currentSpeed == 0) {

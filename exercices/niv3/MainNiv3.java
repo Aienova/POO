@@ -146,8 +146,6 @@ public class MainNiv3 {
         Scanner scanner = new Scanner(System.in);
         MainRoad:while(statut != 2) {
 
-            
-
             for (String[] instruction : instructions) {
 
                 statut = 0;
@@ -156,7 +154,7 @@ public class MainNiv3 {
                while(statut == 0) {
                                 road.setInstruction(instruction[0]);
             System.out.println("\n\n\n**********************DEBUT INSTRUCTION DU MONITEUR*************************** " );
-                                road.setRandomRain();
+                            
                 statut = Command.executeCommand(maVoiture, road, instruction[1], scanner, nbInstruction);
                 
             System.out.println("**********************FIN INSTRUCTION DU MONITEUR*************************** " );
