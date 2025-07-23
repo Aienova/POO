@@ -15,6 +15,9 @@ public class Road {
     private boolean isParking;
     private boolean isTunnel; // Si la route est dans un tunnel
     private boolean isTheEnd; // Si c'est la fin du test de conduite
+    private int points; // Points accumulés durant le test de conduite
+
+
     // Constructeur
     public Road() {
         this.instruction = "";
@@ -31,6 +34,7 @@ public class Road {
         this.isParking = false;
         this.isTunnel = false;
         this.isTheEnd = false;
+        this.points = 40;   
     }
     
     // Constructeur avec paramètres
@@ -52,17 +56,20 @@ public class Road {
         this.isParking = isParking;
         this.isTunnel = isTunnel;
         this.isTheEnd = isTheEnd;
+        this.points = 40;
 
     }
 
 
     // Pluie aléatoire
     public void setRandomRain() {
-        this.isRaining = Math.random() < 0.2; // 20% de chance qu'il pleuve
-        if (this.isRaining && this.speedLimit > 50) {
+        System.out.println("Vérification de la pluie...");
+        this.isRaining = Math.random() < 1; // 100% de chance qu'il pleuve
+        if (this.isRaining ) {
             this.speedLimit -= 10; // Réduction de la limitation de vitesse en cas de pluie si la vitesse est supérieure à 50 km/h
-            System.out.println("Il pleut, il faut mettre les essuie-glaces et la limitation de vitesse est réduite de 10 km/h.");
+            System.out.println(Colors.warning("Il pleut, il faut mettre les essuie-glaces."));
         }
+         System.out.println("Etat de la pluie: " + (this.isRaining ? "Il pleut" : "Il ne pleut pas"));
     }
     
     // Getters et Setters
@@ -93,7 +100,15 @@ public class Road {
     public int getSpeedLimit() {
         return speedLimit;
     }
-    
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
     public void setSpeedLimit(int speedLimit) {
         this.speedLimit = speedLimit;
     }

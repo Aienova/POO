@@ -142,8 +142,11 @@ public class MainNiv3 {
         Car maVoiture = new Car("Toyota", "Corolla", 150, 120);
         Road road = new Road();
         int statut = 0;
+        int nbInstruction=1;
         Scanner scanner = new Scanner(System.in);
         MainRoad:while(statut != 2) {
+
+            
 
             for (String[] instruction : instructions) {
 
@@ -153,11 +156,12 @@ public class MainNiv3 {
                while(statut == 0) {
                                 road.setInstruction(instruction[0]);
             System.out.println("\n\n\n**********************DEBUT INSTRUCTION DU MONITEUR*************************** " );
-
-                statut = Command.executeCommand(maVoiture, road, instruction[1], scanner);
+                                road.setRandomRain();
+                statut = Command.executeCommand(maVoiture, road, instruction[1], scanner, nbInstruction);
+                
             System.out.println("**********************FIN INSTRUCTION DU MONITEUR*************************** " );
             }
-
+            nbInstruction++;
             
             if(statut == 2) {
                 System.out.println("Le test de conduite est terminé.");

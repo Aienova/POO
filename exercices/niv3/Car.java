@@ -190,9 +190,11 @@ public class Car {
         if (isEngineOn && !isReverse) {
             if (currentSpeed + increment <= maxSpeed) {
                 currentSpeed += increment;
+                 setCurrentSpeed(currentSpeed);
                 System.out.println("Accélération : vitesse actuelle " + currentSpeed + " km/h");
             } else {
                 currentSpeed = maxSpeed;
+                setCurrentSpeed(currentSpeed);
                 System.out.println("Vitesse maximale atteinte : " + maxSpeed + " km/h");
             }
         } else if (isReverse) {
@@ -206,8 +208,8 @@ public class Car {
         if (currentSpeed - decrement >= 0) {
             currentSpeed -= decrement;
             System.out.println("Décélération : vitesse actuelle " + currentSpeed + " km/h");
+            setCurrentSpeed(currentSpeed);
         } else {
-            currentSpeed = 0;
             System.out.println("Véhicule arrêté");
         }
     }
